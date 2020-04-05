@@ -1,0 +1,62 @@
+{
+  "_from": "@weiyi/little@^0.1.17",
+  "_id": "@weiyi/little@0.1.17",
+  "_inBundle": false,
+  "_integrity": "sha512-JBvoBt24AI4mhiGqGwGaHltVUi6rYcw7JsJTuqJ1sQv8cvrhwIYHGbPzM88THffg49fFJjFNt6fMWNxexh6O4w==",
+  "_location": "/@weiyi/little",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@weiyi/little@^0.1.17",
+    "name": "@weiyi/little",
+    "escapedName": "@weiyi%2flittle",
+    "scope": "@weiyi",
+    "rawSpec": "^0.1.17",
+    "saveSpec": null,
+    "fetchSpec": "^0.1.17"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "http://wynpm.guahao-inc.com/@weiyi%2flittle/-/little-0.1.17.tgz",
+  "_shasum": "0c7a49887b0cbcca5f4cc4b09d92d49fc0374c15",
+  "_spec": "@weiyi/little@^0.1.17",
+  "_where": "/Users/panin/Documents/work/project/cloud-his-pc-static",
+  "author": {
+    "name": "jiangkangkang"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "just a little tools for dev",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^2.1.1",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
+  },
+  "license": "ISC",
+  "main": "lib/index.js",
+  "name": "@weiyi/little",
+  "peerDependencies": {
+    "element-ui": "^2.2.2",
+    "vue": "^2.5.16"
+  },
+  "scripts": {
+    "build": "npm run build:wbp && npm run build:cpn",
+    "build:cpn": "webpack --config webpack.config.js",
+    "build:wbp": "babel --plugins transform-es2015-modules-commonjs ./src/wbp-dev-proxy.config.js -o ./lib/proxy-options.js",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.1.17"
+}

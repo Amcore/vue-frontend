@@ -4,9 +4,44 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+    <div>
+      <el-button @click='test'>
+        API TEST
+      </el-button>
+
+      <el-button @click='normal'>
+        API NORMAL
+      </el-button>
+    </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import Api from '@/api/test.js'
+export default {
+  mounted() {
+  },
+
+  methods: {
+    test() {
+      Api
+        .test()
+        .then((res) => {
+          console.log(res)
+        })
+    },
+
+    normal() {
+      Api
+        .normal()
+        .then((res) => {
+          console.log(res)
+        })
+    }
+  }
+}
+</script>>
 
 <style lang="less">
 #app {
