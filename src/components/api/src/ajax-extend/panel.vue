@@ -22,11 +22,12 @@
             </el-radio>
           </el-form-item>
           <el-form-item
-            label="标准环境"
-            v-if="targetType === 'test'"
-            prop="apiTarget">
+            v-for='match in matchMap'
+            :key='`${match}-标准环境`'
+            :label="match"
+            v-show="targetType === 'test'">
             <el-select
-              v-model="apiTarget"
+              v-model="martchTargetMap[match].apiTarget"
               placeholder="请选择测试环境"
               size="small">
               <el-option
@@ -37,10 +38,14 @@
             </el-select>
           </el-form-item>
         <el-form-item
+          v-for='match in matchMap'
+          :key='`${match}-自定义`'
           label="自定义"
-          v-if="targetType === 'custom'"
+          v-show="targetType === 'custom'"
           prop="customTarget">
-          <el-input v-model="customTarget" size="small"/>
+          <el-input
+            v-model="martchTargetMap[match].customTarget"
+            size="small"/>
         </el-form-item>
         <el-form-item label="接口维度">
           <el-checkbox
@@ -84,6 +89,7 @@ export default {
 
   data() {
     return {
+      matchMap: [],
       show: false,
       apiTarget: '',
       customTarget: '',
@@ -93,7 +99,8 @@ export default {
       useApiForward: false,
       useApiMock: false,
       apiPattern: '',
-      targetMap: {}
+      targetMap: {},
+      martchTargetMap: {}
     }
   },
 
@@ -113,6 +120,7 @@ export default {
       apiTargetCache.apiTarget = this.apiTarget
       apiTargetCache.useApiMock = this.useApiMock
       apiTargetCache.apiPattern = this.apiPattern
+      apiTargetCache.martchTargetMap = this.martchTargetMap
 
       setStorageItem(STORE_KEY, apiTargetCache, this.expireTime)
       this.toggleDialog(false)
@@ -121,6 +129,26 @@ export default {
   },
 
   watch: {
+    matchMap: {
+      handler: function (val) {
+        if (val) {
+          Object.keys(this.martchTargetMap).forEach((key) => {
+            if (
+              Object.prototype.hasOwnProperty.call(this.matchMap.hasOwnProperty, [key])
+            ) delete this.martchTargetMap[key]
+          })
+          this.matchMap.forEach((val) => {
+            console.log(val)
+            if (!Object.prototype.hasOwnProperty.call(this.martchTargetMap, [val])) {
+              this.martchTargetMap[val] = {
+                apiTarget: '',
+                customTarget: ''
+              }
+            }
+          })
+        }
+      }
+    }
   },
 
   created() {
@@ -134,6 +162,7 @@ export default {
       this.customTarget = apiTargetCache.customTarget
       this.apiExpands = apiTargetCache.apiExpands || {}
       this.apiExpandsMap = apiTargetCache.apiExpandsMap || {}
+      this.martchTargetMap = apiTargetCache.martchTargetMap || {}
     }
   },
 

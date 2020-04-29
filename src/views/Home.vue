@@ -1,18 +1,41 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <el-tree
+    :props="props"
+    :load="loadNode"
+    lazy
+    show-checkbox>
+  </el-tree>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      props: {
+        label: 'name',
+        children: 'zones',
+        isLeaf: 'leaf'
+      }
+    }
+  },
+  methods: {
+    loadNode(node, resolve) {
+      if (node.level === 0) {
+        return resolve([{ name: 'region' }])
+      }
+      if (node.level > 1) return resolve([])
+
+      setTimeout(() => {
+        const data = [{
+          name: 'leaf',
+          leaf: true
+        }, {
+          name: 'zone'
+        }]
+
+        resolve(data)
+      }, 1000)
+    }
   }
 }
 </script>

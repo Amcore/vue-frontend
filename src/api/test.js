@@ -6,6 +6,6 @@ export default {
   },
 
   normal() {
-    return http.get('/normal')
+    return http.get('/normal/test')
   }
 }

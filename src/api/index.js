@@ -6,6 +6,7 @@ const api = axios.create({
 })
 
 const ajaxMiddleware = createAxiosInterceptor({
+  matchMap: ['/api', '/normal'],
   enable: ['test', 'development'].includes('development'),
   useCompleteApi: true,
   targetMap: {
@@ -13,25 +14,10 @@ const ajaxMiddleware = createAxiosInterceptor({
   },
   expands: [
     {
-      label: 'test1',
-      key: 'test1',
+      label: 'normal',
+      key: 'normal',
       targetMap: {
-        stable: 'test1.com',
-        stable1: 'test11.com'
-      }
-    },
-    {
-      label: 'test2',
-      key: 'test2',
-      targetMap: {
-        stable: 'test2.com'
-      }
-    },
-    {
-      label: 'test4',
-      key: 'test4',
-      targetMap: {
-        stable: 'test4.com'
+        stable: 'normal.com'
       }
     }
   ]

@@ -21,16 +21,24 @@ const devServe = {
 
   disableHostCheck: true,
 
-  proxy: {
-    '/api': mergeApiProxyOptions({
-      target: defaultTarget,
-      pathRewrite: {
-        '/api': ''
-      },
-      ws: true,
-      onProxyReq
-    }, { targetMap })
-  }
+  // proxy: {
+  //   '/api': mergeApiProxyOptions({
+  //     target: defaultTarget,
+  //     pathRewrite: {
+  //       '/api': ''
+  //     },
+  //     ws: true,
+  //     onProxyReq
+  //   }, { targetMap })
+  // }
+  proxy: mergeApiProxyOptions('/api', {
+    target: defaultTarget,
+    pathRewrite: {
+      '/api': ''
+    },
+    ws: true,
+    onProxyReq
+  }, { targetMap })
 }
 
 module.exports = devServe
